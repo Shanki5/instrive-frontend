@@ -4,18 +4,15 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 const FileUpload = () => {
 
-    const { control } = useFormContext()
+    const { register } = useFormContext()
 
     return (
-        <Controller
-            name="file"
-            control={control}
-            render={(field) => (
-                <Button variant='contained' >
-                    <input type="file"  {...field} />
-                </Button>
-            )}
-        />
+
+
+        <Button variant='contained' >
+            <input type="file" {...register("file")} />
+        </Button>
+
     )
 }
 

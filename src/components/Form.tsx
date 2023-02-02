@@ -1,11 +1,10 @@
 
 import { Stack } from '@mui/system'
 import React from 'react'
-import FormTextInput from './common/FormTextInput'
 import { useForm, FormProvider } from "react-hook-form"
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, StepContent } from '@mui/material';
+import { Button } from '@mui/material';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
@@ -35,10 +34,9 @@ const Form = () => {
     };
 
     const onSubmit = (formData: any) => {
-        // axios.post('https://webhook.site/1b7922e6-ee65-4fc9-a3a4-e0659870c77c', formData)
-        //     .then((response: any) => console.log(response))
-        //     .catch((error: any) => console.log(error))
-        console.log(formData)
+        axios.post('https://webhook.site/1b7922e6-ee65-4fc9-a3a4-e0659870c77c', formData)
+            .then((response: any) => console.log(response))
+            .catch((error: any) => console.log(error))
     }
 
     function getButton(stepIndex: number) {
@@ -55,15 +53,13 @@ const Form = () => {
             }
         }
     }
-
-
     const methods = useForm<FormInputType>({
         defaultValues: validationSchema.getDefaultFromShape(),
         resolver: yupResolver(validationSchema)
     })
     return (
-        <FormProvider {...methods}>
-            <form>
+        <form>
+            <FormProvider {...methods}>
                 <Stack direction="column" spacing={5} p={5}>
 
                     <Stepper activeStep={activeStep} >
@@ -77,15 +73,15 @@ const Form = () => {
                         ))}
 
                     </Stepper>
-                    {getStepContent(activeStep)}
+                    {GetStepContent(activeStep)}
                     <Stack direction="row" spacing={2} justifyContent="space-between">
                         <Button variant='outlined' onClick={handleBack}>Back</Button>
-                        <Button variant='outlined' onClick={handleNext}>Next</Button>
+                        {getButton(activeStep)}
                     </Stack>
                 </Stack>
 
-            </form>
-        </FormProvider>
+            </FormProvider>
+        </form>
     )
 }
 
@@ -93,7 +89,7 @@ const Form = () => {
 
 export default Form
 
-function getStepContent(stepIndex: number) {
+function GetStepContent(stepIndex: number) {
 
     switch (stepIndex) {
         case 0: {

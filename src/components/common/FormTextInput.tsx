@@ -15,13 +15,14 @@ const FormTextInput = ({ name, label }: IFormTextInputProps) => {
             name={name}
             control={control}
             render={
-                ({ field: { onChange, value }, fieldState: { error } }) => (
+                ({ field: { onChange, value, ...field }, fieldState: { error } }) => (
                     < TextField
                         helperText={error ? error.message : null}
                         error={!!error}
                         onChange={onChange}
                         value={value}
                         label={label}
+                        {...field}
                     />
                 )
             }
