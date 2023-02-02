@@ -1,15 +1,21 @@
 import { Button } from '@mui/material';
 import React, { useState } from 'react'
+import { Controller, useFormContext } from 'react-hook-form';
 
 const FileUpload = () => {
-    const [selectedFile, setFile] = useState(undefined);
-    function handleChange(event: any) {
-        setFile(event.target.files[0])
-    }
+
+    const { control } = useFormContext()
+
     return (
-        <Button variant='contained' >
-            <input type="file" onChange={handleChange} />
-        </Button>
+        <Controller
+            name="file"
+            control={control}
+            render={(field) => (
+                <Button variant='contained' >
+                    <input type="file"  {...field} />
+                </Button>
+            )}
+        />
     )
 }
 
